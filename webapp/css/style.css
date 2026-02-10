@@ -1,0 +1,170 @@
+/* Global Styles */
+.sapMPage {
+    background-color: #f5f8fa !important;
+}
+
+.secondaryText {
+    color: #6a6d70;
+    font-size: 0.9rem;
+}
+
+.infoCard {
+    background-color: #e8f1f8;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+.infoLabel {
+    color: #5d7a8c;
+    /* Muted blue/gray */
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.infoValue {
+    color: #0d2c40;
+    /* Dark blue */
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Timeline Styles */
+.timelineContainer {
+    position: relative;
+    /* Removed large padding-left from container, moved to stopItem */
+    padding-left: 0;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.timelineLine {
+    position: absolute;
+    /* Center line at 50px */
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #aebAC6;
+    z-index: 0;
+}
+
+.stopItem {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    /* Reserve space for line and markers */
+    padding-left: 100px;
+}
+
+.stopMarker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #aebAC6;
+    background-color: white;
+    position: absolute;
+    /* Align center with line (50px). Marker center is 8px. 50-8 = 42px */
+    left: 42px;
+}
+
+.selectedStopName {
+    font-weight: bold;
+    color: #0d2c40;
+}
+
+.stopName {
+    font-size: 1rem;
+    color: #3b5066;
+}
+
+/* Selected Item Styling */
+/* We can add a background to the selected item similar to the mockup */
+.stopContent:has(.selectedStopName) {
+    background-color: #e8f1f8;
+    /* Light blue */
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #1f7cc7;
+}
+
+.selectedLabel {
+    color: #1f7cc7;
+    font-size: 0.7rem;
+    margin-left: auto;
+    /* Push to right */
+    padding-right: 1rem;
+}
+
+/* Bus Icon Animation */
+.shuttleIconWrapper {
+    position: absolute;
+    /* Align center with line (50px). Wrapper center is 18px. 50-18 = 32px */
+    left: 32px;
+    width: 36px;
+    height: 36px;
+    background-color: #e91e63;
+    /* Pink/Red */
+    border-radius: 50%;
+    /* Use flexbox for centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    /* On top of line and markers */
+    top: 0%;
+    /* Dynamic */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: top 0.1s linear;
+    /* Smooth movement */
+}
+
+.shuttleIcon {
+    color: white;
+    font-size: 1.5rem;
+    /* Increased size */
+    line-height: normal;
+    /* Fix vertical alignment */
+}
+
+/* Profile Dialog Styles */
+.profileValue {
+    font-size: 0.9rem !important;
+    color: #1d435f !important;
+}
+
+.profileField {
+    background-color: #e8f1f8;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.profileTitle {
+    color: white !important;
+}
+
+.profileCloseBtn .sapMBtnIcon {
+    color: white !important;
+}
+
+/* Custom Dialog Header Styling Override (Mocking the blue header) */
+.sapMDialogSection {
+    background-color: white !important;
+}
+
+/* We target the bar inside the custom header */
+.profileHeader {
+    background-color: #3e8cd0 !important;
+    /* Blue header */
+}
+
+/* Center Avatar */
+.profileAvatar {
+    background-color: #3e8cd0 !important;
+    border: 4px solid white;
+    box-shadow: 0 0 0 1px #d9d9d9;
+}

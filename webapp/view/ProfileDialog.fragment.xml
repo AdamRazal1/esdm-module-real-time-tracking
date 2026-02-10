@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        title="Profile"
+        class="sapUiPopupWithPadding"
+        contentWidth="350px">
+        <customHeader>
+            <Bar class="profileHeader">
+                <contentLeft>
+                    <Title text="Profile" level="H2" class="profileTitle"/>
+                </contentLeft>
+                <contentRight>
+                    <Button icon="sap-icon://decline" press="onProfileClose" class="profileCloseBtn"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <VBox class="sapUiSmallMargin" alignItems="Center">
+                <Avatar src="sap-icon://person-placeholder" displaySize="XL" class="sapUiMediumMarginBottom profileAvatar"/>
+                
+                <VBox class="profileField" width="100%">
+                    <Label text="FULL NAME" design="Bold" class="infoLabel"/>
+                    <Text text="{/user/fullName}" class="infoValue profileValue"/>
+                </VBox>
+
+                <VBox class="profileField" width="100%">
+                    <Label text="MATRIC NUMBER" design="Bold" class="infoLabel"/>
+                    <Text text="{/user/matricNumber}" class="infoValue profileValue"/>
+                </VBox>
+
+                <VBox class="profileField" width="100%">
+                    <Label text="COURSE ENROLLED" design="Bold" class="infoLabel"/>
+                    <Text text="{/user/course}" class="infoValue profileValue"/>
+                </VBox>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>
