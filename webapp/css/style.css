@@ -109,6 +109,8 @@
     background-color: #e91e63;
     /* Pink/Red */
     border-radius: 50%;
+    border: 2px solid white;
+    /* Added border */
     /* Use flexbox for centering */
     display: flex;
     align-items: center;
