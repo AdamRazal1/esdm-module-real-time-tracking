@@ -7,13 +7,20 @@
     xmlns:l="sap.ui.layout">
 
     <Page
-        title="{i18n>appTitle}"
+        showHeader="true"
         backgroundDesign="Solid"
         class="sapUiContentPadding">
         
-        <headerContent>
-            <Avatar src="sap-icon://customer" displaySize="XS" press="onProfilePress" />
-        </headerContent>
+        <customHeader>
+             <Bar class="profileHeader"> <!-- Reusing blue profile header for main header match -->
+                <contentLeft>
+                    <Title text="{i18n>appTitle}" level="H2" class="profileTitle sapUiSmallMarginBegin"/>
+                </contentLeft>
+                <contentRight>
+                    <Avatar src="sap-icon://customer" displaySize="XS" press="onProfilePress" active="true" class="sapUiSmallMarginEnd pointerCursor"/>
+                </contentRight>
+             </Bar>
+        </customHeader>
 
         <content>
             <VBox class="sapUiSmallMargin">
@@ -32,6 +39,20 @@
                     </VBox>
                 </HBox>
 
+                <!-- Bus Occupancy Card -->
+                <VBox class="infoCard" width="100%">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center">
+                        <Label text="LIVE PASSENGER LOAD" design="Bold" class="infoLabel"/>
+                        <Label text="{/occupancyStatus}" design="Bold" class="infoLabel" state="{= ${/occupancyLevel} > 80 ? 'Error' : (${/occupancyLevel} > 50 ? 'Warning' : 'Success') }"/>
+                    </HBox>
+                    <ProgressIndicator 
+                        percentValue="{/occupancyLevel}" 
+                        displayValue="{/occupancyLevel}%" 
+                        state="{= ${/occupancyLevel} > 80 ? 'Error' : (${/occupancyLevel} > 50 ? 'Warning' : 'Success') }"
+                        height="1.5rem"
+                        class="sapUiSmallMarginTop"/>
+                </VBox>
+
                 <!-- Timeline Container -->
                 <VBox class="timelineContainer">
                     <!-- The vertical line -->
@@ -43,20 +64,27 @@
                          <core:Icon src="sap-icon://public-transport" class="shuttleIcon" />
                     </VBox>
 
-                    <VBox items="{/stops}">
-                        <HBox class="stopItem" alignItems="Center">
-                            <!-- Stop Circle -->
-                            <VBox class="stopMarker" />
-                            
-                            <!-- Stop Name -->
-                            <VBox class="stopContent sapUiSmallMarginBegin" width="100%">
-                                <Text text="{name}" class="stopName {= ${selected} ? 'selectedStopName' : '' }" />
-                            </VBox>
-                            
-                            <!-- Selected Label -->
-                            <Label text="SELECTED" visible="{selected}" class="selectedLabel" />
-                        </HBox>
-                    </VBox>
+                    <List items="{/stops}" showSeparators="None" backgroundDesign="Transparent" itemPress="onStopPress">
+                        <CustomListItem type="Active" press="onStopPress" class="transparentItem">
+                            <HBox class="stopItem" alignItems="Center">
+                                <!-- Stop Markers -->
+                                <!-- Standard Marker -->
+                                <VBox class="stopMarker" visible="{= !${selected} }" />
+                                <!-- 'You' Marker -->
+                                <VBox class="youMarker" visible="{= ${selected} }" alignItems="Center" justifyContent="Center">
+                                    <Text text="You" class="youText" />
+                                </VBox>
+                                
+                                <!-- Stop Name -->
+                                <VBox class="stopContent sapUiSmallMarginBegin" width="100%">
+                                    <Text text="{name}" class="stopName {= ${selected} ? 'selectedStopName' : '' }" />
+                                </VBox>
+                                
+                                <!-- Selected Label -->
+                                <Label text="SELECTED" visible="{selected}" class="selectedLabel" />
+                            </HBox>
+                        </CustomListItem>
+                    </List>
                 </VBox>
 
             </VBox>

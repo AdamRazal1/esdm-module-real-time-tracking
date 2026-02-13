@@ -1,6 +1,19 @@
+/* CSS Variables for Consistency */
+:root {
+    --primary-blue: #3E8CD0;
+    --primary-dark: #2C6E9F;
+    --text-dark: #0D2C40;
+    --text-muted: #5D7A8C;
+    --bg-light: #F5F8FA;
+    --card-bg: #E8F1F8;
+    --white: #FFFFFF;
+    --accent-pink: #E91E63;
+    --accent-green: #7AB800;
+}
+
 /* Global Styles */
 .sapMPage {
-    background-color: #f5f8fa !important;
+    background-color: var(--bg-light) !important;
 }
 
 .secondaryText {
@@ -8,25 +21,32 @@
     font-size: 0.9rem;
 }
 
+/* Info Cards */
 .infoCard {
-    background-color: #e8f1f8;
+    background-color: var(--card-bg);
     border-radius: 8px;
     padding: 1rem;
     width: 48%;
     box-sizing: border-box;
+    transition: transform 0.2s;
+    /* HCI: Subtle animation */
+}
+
+.infoCard:hover {
+    transform: translateY(-2px);
+    /* HCI: Feedback */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .infoLabel {
-    color: #5d7a8c;
-    /* Muted blue/gray */
+    color: var(--text-muted);
     font-size: 0.7rem !important;
     text-transform: uppercase;
     margin-bottom: 0.25rem;
 }
 
 .infoValue {
-    color: #0d2c40;
-    /* Dark blue */
+    color: var(--text-dark);
     font-size: 1.1rem;
     font-weight: bold;
 }
@@ -34,7 +54,6 @@
 /* Timeline Styles */
 .timelineContainer {
     position: relative;
-    /* Removed large padding-left from container, moved to stopItem */
     padding-left: 0;
     margin-top: 2rem;
     padding-bottom: 2rem;
@@ -42,12 +61,11 @@
 
 .timelineLine {
     position: absolute;
-    /* Center line at 50px */
     left: 50px;
     top: 0;
     bottom: 0;
     width: 2px;
-    background-color: #aebAC6;
+    background-color: #AEBAC6;
     z-index: 0;
 }
 
@@ -56,117 +74,286 @@
     padding-bottom: 1.5rem;
     position: relative;
     z-index: 1;
-    /* Reserve space for line and markers */
     padding-left: 100px;
+    cursor: pointer;
+    /* HCI: Affordance */
+    transition: background-color 0.2s;
+    border-radius: 12px;
+}
+
+.stopItem:hover {
+    background-color: rgba(62, 140, 208, 0.05);
+    /* HCI: Feedback */
 }
 
 .stopMarker {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 2px solid #aebAC6;
-    background-color: white;
+    border: 2px solid #AEBAC6;
+    background-color: var(--white);
     position: absolute;
-    /* Align center with line (50px). Marker center is 8px. 50-8 = 42px */
     left: 42px;
+    transition: transform 0.2s;
+}
+
+.youMarker {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-blue);
+    border-radius: 8px;
+    position: absolute;
+    left: 34px;
+    z-index: 2;
+    box-shadow: 0 0 0 2px var(--white);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* HCI: Delight */
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.youText {
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: bold;
 }
 
 .selectedStopName {
     font-weight: bold;
-    color: #0d2c40;
+    color: var(--text-dark);
+    font-size: 1.1rem;
 }
 
 .stopName {
     font-size: 1rem;
-    color: #3b5066;
+    color: #3B5066;
 }
 
 /* Selected Item Styling */
-/* We can add a background to the selected item similar to the mockup */
 .stopContent:has(.selectedStopName) {
-    background-color: #e8f1f8;
-    /* Light blue */
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    border: 1px solid #1f7cc7;
+    background-color: #D1E8F7;
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--primary-blue);
+    display: flex;
 }
 
 .selectedLabel {
-    color: #1f7cc7;
-    font-size: 0.7rem;
+    color: var(--primary-blue);
+    font-size: 0.6rem;
+    font-weight: bold;
     margin-left: auto;
-    /* Push to right */
-    padding-right: 1rem;
+    padding-right: 2rem;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* Bus Icon Animation */
 .shuttleIconWrapper {
     position: absolute;
-    /* Align center with line (50px). Wrapper center is 18px. 50-18 = 32px */
     left: 32px;
     width: 36px;
     height: 36px;
-    background-color: #e91e63;
-    /* Pink/Red */
+    background-color: var(--accent-pink);
     border-radius: 50%;
-    border: 2px solid white;
-    /* Added border */
-    /* Use flexbox for centering */
+    border: 2px solid var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
-    /* On top of line and markers */
     top: 0%;
-    /* Dynamic */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: top 0.1s linear;
-    /* Smooth movement */
 }
 
 .shuttleIcon {
-    color: white;
-    font-size: 1.5rem;
-    /* Increased size */
+    color: var(--white);
+    font-size: 1.5rem !important;
     line-height: normal;
-    /* Fix vertical alignment */
 }
 
 /* Profile Dialog Styles */
 .profileValue {
     font-size: 0.9rem !important;
-    color: #1d435f !important;
+    color: #1D435F !important;
 }
 
 .profileField {
-    background-color: #e8f1f8;
+    background-color: var(--card-bg);
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 0.5rem;
 }
 
 .profileTitle {
-    color: white !important;
+    color: var(--white) !important;
 }
 
 .profileCloseBtn .sapMBtnIcon {
-    color: white !important;
+    color: var(--white) !important;
 }
 
-/* Custom Dialog Header Styling Override (Mocking the blue header) */
 .sapMDialogSection {
-    background-color: white !important;
+    background-color: var(--white) !important;
 }
 
-/* We target the bar inside the custom header */
 .profileHeader {
-    background-color: #3e8cd0 !important;
-    /* Blue header */
+    background-color: var(--primary-blue) !important;
 }
 
-/* Center Avatar */
 .profileAvatar {
-    background-color: #3e8cd0 !important;
-    border: 4px solid white;
-    box-shadow: 0 0 0 1px #d9d9d9;
+    background-color: var(--primary-blue) !important;
+    border: 4px solid var(--white);
+    box-shadow: 0 0 0 1px #D9D9D9;
+}
+
+/* List Item Styles Override */
+.transparentItem,
+.transparentItem .sapMLIBContent {
+    background-color: transparent !important;
+    border-bottom: none !important;
+    padding: 0 !important;
+}
+
+.transparentItem:active {
+    transform: scale(0.98);
+    /* HCI: Click Feedback */
+}
+
+/* Stop Details Dialog Styles */
+.stopDetailsDialog.bottomSheetDialog {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 20px 20px 0 0 !important;
+    border: none !important;
+    animation: slideInUp 0.3s ease-out forwards;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.stopDetailsDialog .sapMDialogSection {
+    background-color: var(--white) !important;
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.stopDetailsTitle {
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.detailsCard {
+    background-color: #F0F4F8;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 48%;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+    /* HCI: Feedback */
+}
+
+.detailsCard:hover {
+    transform: scale(1.02);
+}
+
+.iconBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.boxIcon {
+    color: var(--white) !important;
+    font-size: 1.5rem !important;
+}
+
+.blueIconBox {
+    background-color: var(--primary-blue);
+}
+
+.greenIconBox {
+    background-color: var(--accent-green);
+}
+
+.cardValue {
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.cardLabel {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.setStopBtn {
+    height: auto !important;
+}
+
+.setStopBtn .sapMBtnInner {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 8px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.1s;
+    /* HCI: Feedback */
+}
+
+.setStopBtn:active .sapMBtnInner {
+    transform: scale(0.98);
+    background-color: var(--primary-dark);
+}
+
+.closeBtn {
+    background: transparent !important;
+    border: none !important;
+    color: #AEBAC6 !important;
+    min-width: 2rem !important;
+    cursor: pointer;
+}
+
+.closeBtn .sapMBtnIcon {
+    color: #AEBAC6 !important;
+    font-size: 1rem;
+}
+
+.closeBtn:hover {
+    background: transparent !important;
+    opacity: 0.7;
+}
+
+.pointerCursor {
+    cursor: pointer;
 }
